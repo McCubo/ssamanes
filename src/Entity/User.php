@@ -6,9 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AppUserRepository")
+ * @ORM\Table(name="app_users")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class AppUser implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -41,6 +42,16 @@ class AppUser implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="smallint")
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $role;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $expirationDate;
 
     public function getId()
     {
@@ -106,13 +117,38 @@ class AppUser implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
+    
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    } 
+
+    public function getExpirationDate(): ?\DateTimeInterface
+    {
+        return $this->expirationDate;
+    }
+
+    public function setExpirationDate(?\DateTimeInterface $expirationDate): self
+    {
+        $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
+    
     # User interface abstract methods
     public function getSalt() {
         return null;
     }
     
     public function getRoles() {
-        return array('ROLE_USER');
+        return array($this->role);
     }
 
     public function eraseCredentials() {
@@ -120,7 +156,10 @@ class AppUser implements AdvancedUserInterface, \Serializable
     
     # AdvancedUserInterface abstract methods
     public function isAccountNonExpired() {
-        return true;
+        if (null == $this->expirationDate) {
+            return true;
+        }
+        return !(new \DateTime() >= $this->expirationDate);
     }
 
     public function isAccountNonLocked() {
@@ -141,6 +180,9 @@ class AppUser implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->status,
+            $this->expirationDate,
+            $this->$activatedAt,
+            $this->expirationDate,
         ));
     }
 
@@ -151,7 +193,10 @@ class AppUser implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->status,
+            $this->expirationDate,
+            $this->$activatedAt,
+            $this->expirationDate,
         ) = unserialize($serialized, array('allowed_classes' => false));
-    }    
-    
+    }
+
 }
