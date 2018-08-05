@@ -24,5 +24,12 @@ class DefaultController extends Controller
     public function admin()
     {
         return new Response('<html><body>Admin page!</body></html>');
-    }    
+    }
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function home()
+    {
+        return new Response('<html><body>Home page!</body></html>');
+    }  
 }

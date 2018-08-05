@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable, EquatableInterface
 {
     /**
      * @ORM\Id()
@@ -163,7 +165,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     public function isAccountNonLocked() {
-        return $this->$activatedAt != null;
+        return $this->activatedAt != null;
     }
 
     public function isCredentialsNonExpired() {
@@ -181,7 +183,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->password,
             $this->status,
             $this->expirationDate,
-            $this->$activatedAt,
+            $this->activatedAt,
             $this->expirationDate,
         ));
     }
@@ -194,9 +196,15 @@ class User implements AdvancedUserInterface, \Serializable
             $this->password,
             $this->status,
             $this->expirationDate,
-            $this->$activatedAt,
+            $this->activatedAt,
             $this->expirationDate,
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
+    
+    public function isEqualTo(UserInterface $user)
+    {
+        return true;
+    }
+
 
 }

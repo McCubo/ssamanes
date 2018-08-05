@@ -11,10 +11,6 @@ class SecurityController extends Controller {
     /**
      * @Route("/login", name="login")
      */
-    public function login() {
-        
-    }
-
     public function login(AuthenticationUtils $authenticationUtils) {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
