@@ -158,10 +158,13 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     
     # AdvancedUserInterface abstract methods
     public function isAccountNonExpired() {
-        if (null == $this->expirationDate) {
+        if (is_null($this->expirationDate)) {
             return true;
         }
-        return !(new \DateTime() >= $this->expirationDate);
+        if (new \DateTime() > $this->expirationDate) {
+            return false;
+        }
+        return true;
     }
 
     public function isAccountNonLocked() {
@@ -184,7 +187,6 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
             $this->status,
             $this->expirationDate,
             $this->activatedAt,
-            $this->expirationDate,
         ));
     }
 
@@ -197,7 +199,6 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
             $this->status,
             $this->expirationDate,
             $this->activatedAt,
-            $this->expirationDate,
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
     

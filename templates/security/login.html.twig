@@ -1,16 +1,29 @@
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+{% extends 'login.base.html.twig' %}
 
-<form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="ssam_username" value="{{ last_username }}" />
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="ssam_password" />
-    {#
-        If you want to control the URL the user
-        is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-    <button type="submit">login</button>
+{% block stylesheets %}
+ <style>
+.alert {
+  margin-bottom: 5px;
+  height: 20px;
+  line-height:20px;
+  padding:0px 15px;
+}
+</style>
+{% endblock %}
+{% block body %}
+<form action="{{ path('login') }}" method="post" class="form-signin">    
+    <img class="mb-4" src="images/login.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Bienvenido</h1>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}    
+    <label for="username" class="sr-only">Usuario de sistema</label>
+    <input type="text" id="username" name="ssam_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required="required" autofocus="autofocus" />
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="ssam_password" class="form-control" placeholder="Password" required="required" />
+    <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+    <p class="mt-5 mb-3 text-muted">© SSAMANES DB. 2018-2019</p>
 </form>
+{% endblock %}
