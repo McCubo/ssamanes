@@ -2,28 +2,33 @@
 
 {% block stylesheets %}
  <style>
-.alert {
-  margin-bottom: 5px;
-  height: 20px;
-  line-height:20px;
-  padding:0px 15px;
-}
+     .alert {
+        margin-bottom: 5px;
+        height: 20px;
+        line-height:20px;
+        padding:0px 15px;
+     }
+     input[type='password'] {
+         margin-top: 5px;
+     }
+     .legend, .welcome {
+        color: white;    
+     }
 </style>
 {% endblock %}
 {% block body %}
 <form action="{{ path('login') }}" method="post" class="form-signin">    
     <img class="mb-4" src="images/login.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Bienvenido</h1>
+    <h1 class="h3 mb-3 font-weight-normal welcome">Bienvenido</h1> 
     {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
+        {{ dump(error) }}
+        <div class="alert alert-warning" role="alert">
+            {{ error.messageKey|trans }}
         </div>
     {% endif %}    
-    <label for="username" class="sr-only">Usuario de sistema</label>
-    <input type="text" id="username" name="ssam_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required="required" autofocus="autofocus" />
-    <label for="password" class="sr-only">Password</label>
+    <input type="text" id="username" name="ssam_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required="required" autofocus="autofocus" />    
     <input type="password" id="password" name="ssam_password" class="form-control" placeholder="Password" required="required" />
-    <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
-    <p class="mt-5 mb-3 text-muted">© SSAMANES DB. 2018-2019</p>
+    <button class="btn btn-danger btn-block" type="submit">Ingresar</button>
+    <p class="mt-5 mb-3 legend">© SSAMANES DB. 2018-2019</p>
 </form>
 {% endblock %}
