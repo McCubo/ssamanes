@@ -19,16 +19,15 @@
 {% block body %}
 <form action="{{ path('login') }}" method="post" class="form-signin">    
     <img class="mb-4" src="images/login.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal welcome">Bienvenido</h1> 
+    <h1 class="h3 mb-3 font-weight-normal welcome">{% trans %}Welcome.{% endtrans %}</h1> 
     {% if error %}
-        {{ dump(error) }}
         <div class="alert alert-warning" role="alert">
             {{ error.messageKey|trans }}
         </div>
     {% endif %}    
     <input type="text" id="username" name="ssam_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required="required" autofocus="autofocus" />    
     <input type="password" id="password" name="ssam_password" class="form-control" placeholder="Password" required="required" />
-    <button class="btn btn-danger btn-block" type="submit">Ingresar</button>
+    <button class="btn btn-danger btn-block" type="submit">{% trans %}Login{% endtrans %}</button>
     <p class="mt-5 mb-3 legend">© SSAMANES DB. 2018-2019</p>
 </form>
 {% endblock %}

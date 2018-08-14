@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Utils\McString;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CivilStatusRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class CivilStatus
 {
@@ -88,4 +90,26 @@ class CivilStatus
 
         return $this;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDefaultValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->status = 1;
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedDateValue() {
+        $this->updatedAt = new \DateTime();
+    }
+    
+    public function getNameSlug(): ?string 
+    {
+        return McString::slugify($this->name);
+    }
+    
 }

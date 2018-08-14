@@ -1,0 +1,40 @@
+{% extends 'blank.html.twig' %}
+
+{% block title %}Lista de Estados Civiles {% endblock %}
+{% block pagetitle %}Lista de Estados Civiles {% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for civil_status in civil_statuses %}
+            <tr>
+                <td>{{ civil_status.id }}</td>
+                <td>{{ civil_status.name }}</td>
+                <td>{{ civil_status.status }}</td>
+                <td>{{ civil_status.createdAt ? civil_status.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ civil_status.updatedAt ? civil_status.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('civil_status_show', {'name': civil_status.nameSlug, 'id': civil_status.id}) }}">show</a>
+                    <a href="{{ path('civil_status_edit', {'id': civil_status.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('civil_status_new') }}">Create new</a>
+{% endblock %}

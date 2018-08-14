@@ -1,0 +1,37 @@
+{% extends 'blank.html.twig' %}
+
+{% block title %}Detalles de {{ civil_status.name|lower }}{% endblock %}
+{% block pagetitle %}Detalles {{ civil_status.name|lower }}{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ civil_status.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ civil_status.name }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ civil_status.status }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ civil_status.createdAt ? civil_status.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ civil_status.updatedAt ? civil_status.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('civil_status_index') }}">back to list</a>
+
+    <a href="{{ path('civil_status_edit', {'id': civil_status.id}) }}">edit</a>
+
+    {{ include('civil_status/_delete_form.html.twig') }}
+{% endblock %}
