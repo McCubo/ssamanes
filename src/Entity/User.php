@@ -183,10 +183,10 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
         return serialize(array(
             $this->id,
             $this->username,
+            $this->role,
             $this->password,
             $this->status,
             $this->expirationDate,
-            $this->activatedAt,
         ));
     }
 
@@ -195,17 +195,38 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
         list (
             $this->id,
             $this->username,
+            $this->role,
             $this->password,
             $this->status,
             $this->expirationDate,
-            $this->activatedAt,
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
     
     public function isEqualTo(UserInterface $user)
     {
-        return true;
+        if(!$user instanceof User) {
+            return false;
+        }
+        return $this->isSameUser($user);
     }
 
+    private function isSameUser(UserInterface $user): ?bool {
+        if ($this->username != $user->getUsername()) {
+            return false;
+        }
+        if ($this->password != $user->getPassword()) {
+            return false;
+        }
+        if ($this->status != $user->getStatus()) {
+            return false;
+        }
+        if ($this->role != $user->getRole()) {
+            return false;
+        }
+        if ($this->expirationDate != $user->getExpirationDate() && new \DateTime() > $user->getExpirationDate()) {
+            return false;
+        }
+        return true;
+    }
 
 }
