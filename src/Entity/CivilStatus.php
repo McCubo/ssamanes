@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Utils\McString;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CivilStatusRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="name", message="Ya existe un registro con ese nombre!")
  */
 class CivilStatus
 {
@@ -19,14 +22,12 @@ class CivilStatus
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 2, max = 75, minMessage = "Estado Civil debe tener al menos {{ limit }} caracteres de longitud", 
+     *  maxMessage = "Estado Civil no puede ser mayor a {{ limit }} caracteres")
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $status;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,6 +38,11 @@ class CivilStatus
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
 
     public function getId()
     {
@@ -51,18 +57,6 @@ class CivilStatus
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
@@ -97,7 +91,7 @@ class CivilStatus
     public function setDefaultValues()
     {
         $this->createdAt = new \DateTime();
-        $this->status = 1;
+        $this->status = true;
     }
     
     /**
@@ -110,6 +104,18 @@ class CivilStatus
     public function getNameSlug(): ?string 
     {
         return McString::slugify($this->name);
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
     
 }
