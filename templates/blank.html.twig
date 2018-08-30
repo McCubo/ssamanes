@@ -149,8 +149,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main content -->
     <section class="content container-fluid">
-
-      {% block body %}{% endblock %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box">
+    				<div class="box-body">
+    					{% block body %}{% endblock %}
+    				</div>
+				</div>		            
+			</div>
+		</div>      
     </section>
     <!-- /.content -->
   </div>

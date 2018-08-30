@@ -1,21 +1,15 @@
 {{ form_start(form) }}
-  <div class="alert alert-danger" role="alert">
     {{ form_errors(form) }}
-  </div>
-  <div class="form-group">
+	<div class="form-group">
     {{ form_label(form.name) }}
     {{ form_widget(form.name) }}
-    <div class="alert alert-danger" role="alert">
-        {{ form_errors(form.name) }}
-	</div>
-  </div>
-  <div class="form-check">   
+    {{ form_errors(form.name) }}
+  	</div>
+  	<div class="form-check">   
     {{ form_widget(form.status) }}
     {{ form_label(form.status) }}
+    {{ form_errors(form.status) }}
     <small class="form-text text-muted">Los registros inactivos no seran elegibles en la lista de estados civiles.</small>
-    <div class="alert alert-danger" role="alert">
-      {{ form_errors(form.status) }}
-    </div>
-  </div>
+  	</div>
   <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

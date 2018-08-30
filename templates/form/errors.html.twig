@@ -1,0 +1,16 @@
+{% block form_errors %}
+    {% if errors|length > 0 %}
+    {% if form is not rootform %}
+    	<span class="help-block">
+    {% else %}
+    	<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    	<h4><i class="icon fa fa-ban"></i>Error: </h4>
+    {% endif %}
+    <ul class="list-unstyled">
+        {% for error in errors %}
+            <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
+        {% endfor %}
+    </ul>
+    {% if form is not rootform %}</span>{% else %}</div>{% endif %}
+    {% endif %}
+{% endblock form_errors %}
