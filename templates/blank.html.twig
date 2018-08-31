@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <p>
                   ::User Name Full Name::
-                  <small>Member since ::insertdate::</small>
+                  <small>Usuario desde ::insertdate::</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Salir del Sistema</a>
+                  <a href="{{ path('logout') }}" class="btn btn-default btn-flat">Salir del Sistema</a>
                 </div>
               </li>
             </ul>
@@ -130,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </li>
         <li><a href="#"><i class="fa fa-gears"></i> <span>Configuraci&oacute;n de cuota</span></a></li>
         <li><a href="#"><i class="fa fa-soundcloud"></i> <span>Usuarios del sistema</span></a></li>
-        <li><a href="#"><i class="fa fa-gears"></i> <span>Configurar Catalogos</span></a></li>
+        <li><a href="{{ path('admin_index') }}"><i class="fa fa-gears"></i> <span>Configurar Catalogos</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
