@@ -26,6 +26,22 @@
                 <source>Login</source>
                 <target>Ingresar</target>
             </trans-unit>
+            <trans-unit id="7">
+                <source>server.error.notfound</source>
+                <target>Oops! La pagina solicitada no fue encontrada!</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>server.error.forbidden</source>
+                <target>Oops! Aunque es un usuario autenticado, necesita permisos especiales para acceder a este contenido. Pídale al administrador del sistema que le otorgue acceso!</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>server.error.broken</source>
+                <target>Algo está roto. Por favor, háganos saber lo que estaba haciendo cuando ocurrió este error. Lo arreglaremos lo más pronto posible. Pedimos disculpas por cualquier inconveniente causado.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>server.error.general</source>
+                <target>Ha ocurrido un error general, intente recargar la pagina!</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

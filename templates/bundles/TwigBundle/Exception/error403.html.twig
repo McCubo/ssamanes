@@ -1,0 +1,15 @@
+{% extends 'error.base.html.twig' %}
+
+{% block body %}
+<!-----start-logo--------->
+<div class="logo">
+	<h1>
+		<a href="#"><img src="{{ asset('images/403.png') }}" /></a>
+	</h1>
+	<span> 
+		<img src="{{ asset('images/signal.png') }}" />
+		{{ 'server.error.forbidden'|trans }}
+	</span>
+</div>
+<!-----end-logo--------->
+{% endblock %}
