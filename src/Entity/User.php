@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="app_users")
+ * @ORM\Table(name="app_user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements AdvancedUserInterface, \Serializable, EquatableInterface
