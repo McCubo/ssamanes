@@ -2,25 +2,29 @@
 
 namespace App\EventListener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use App\Entity\ApplicationLog;
 
 class ExceptionListener {
 
+    private $doctrine;
+
+    public function __construct (EntityManagerInterface $doctrine) {
+        $this->doctrine = $doctrine;
+    }
+
     public function onKernelException (GetResponseForExceptionEvent $event) {
         $exception = $event->getException();
-        $message = sprintf('My Error says: %s with code: %s',
-                $exception->getMessage(), $exception->getCode());
+        $appLog = new ApplicationLog();
 
-        $response = new Response();
-        $response->setContent($message);
-        if ($exception instanceof HttpExceptionInterface) {
-            $response->setStatusCode($exception->getStatusCode());
-            $response->headers->replace($exception->getHeaders());
-        } else {
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-        $event->setResponse($response);
+        $appLog->setEventName("Exception Fatal Error")
+            ->setEventMessage($exception->getMessage())
+            ->setEventCode($exception->getCode())
+            ->setEventIP($event->getRequest()->getClientIp())
+            ->setEventPath($event->getRequest()->getPathInfo())
+            ->setEventMethod($event->getRequest()->getMethod());
+        $this->doctrine->persist($appLog);
+        $this->doctrine->flush();
     }
 }
