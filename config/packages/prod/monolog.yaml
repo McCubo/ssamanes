@@ -20,7 +20,7 @@ monolog:
         swift:
             type:       swift_mailer
             from_email: 'mccubo.spam@gmail.com'
-            to_email:   ['cubiascaceres@gmail.com', 'mccubopsn@gmail.com']
+            to_email:   ['mccubopsn@gmail.com']
             subject:    'SSAMANES DB: An Error Occurred! %%message%%'
             level:      debug
             formatter:  monolog.formatter.html
