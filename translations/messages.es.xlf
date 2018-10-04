@@ -46,6 +46,10 @@
                 <source>server.error.general</source>
                 <target>Ha ocurrido un error general, intente recargar la pagina!</target>
             </trans-unit>
+            <trans-unit id="11">
+                <source>label.remember_me</source>
+                <target>Recuérdame!</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -17,6 +17,13 @@ security:
             http_basic: ~
             provider: ssamanes_provider
 
+            remember_me:
+              name: ssamanes_cookie
+              secret: '%kernel.secret%'
+              lifetime: 604800 # 1 week in seconds
+              path: /
+              remember_me_parameter: ssam_remember_me
+              always_remember_me: false
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
