@@ -19,6 +19,18 @@ class BenefitTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, BenefitType::class);
     }
 
+    /**
+     * 
+     * @return int|NULL Number of active records on the database.
+     */
+    public function getActiveCount(): ? int {
+        $queryBuilder = $this->createQueryBuilder('bt');
+        return $queryBuilder
+            ->select('count(bt.id)')
+            ->andWhere('bt.status = :status')
+            ->setParameter('status', 1)
+        ->getQuery()->getSingleScalarResult();
+    }
 //    /**
 //     * @return BenefitType[] Returns an array of BenefitType objects
 //     */

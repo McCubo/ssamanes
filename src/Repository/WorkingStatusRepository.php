@@ -19,6 +19,16 @@ class WorkingStatusRepository extends ServiceEntityRepository
         parent::__construct($registry, WorkingStatus::class);
     }
 
+    public function getActiveCount(): ? int
+    {
+        $queryBuilder = $this->createQueryBuilder('ws');
+        return $queryBuilder
+        ->select('count(ws.id)')
+        ->andWhere('ws.status = :status')
+        ->setParameter('status', 1)
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
 //    /**
 //     * @return WorkingStatus[] Returns an array of WorkingStatus objects
 //     */

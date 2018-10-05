@@ -19,6 +19,16 @@ class WorkPlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, WorkPlace::class);
     }
 
+    public function getActiveCount(): ? int
+    {
+        $queryBuilder = $this->createQueryBuilder('wp');
+        return $queryBuilder
+            ->select('count(wp.id)')
+            ->andWhere('wp.status = :status')
+            ->setParameter('status', 1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return WorkPlace[] Returns an array of WorkPlace objects
 //     */

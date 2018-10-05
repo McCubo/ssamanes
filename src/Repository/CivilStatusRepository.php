@@ -18,6 +18,18 @@ class CivilStatusRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CivilStatus::class);
     }
+    
+    public function getActiveCount(): ? int 
+    {
+        $queryBuilder = $this->createQueryBuilder('cs');
+        return $queryBuilder
+            ->select('count(cs.id)')
+            ->andWhere('cs.status = :status')
+            ->setParameter('status', 1)
+            ->getQuery()
+            ->getSingleScalarResult();
+        
+    }
 
 //    /**
 //     * @return CivilStatus[] Returns an array of CivilStatus objects
