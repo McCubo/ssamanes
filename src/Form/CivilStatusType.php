@@ -14,11 +14,11 @@ class CivilStatusType extends AbstractType
     {
         
         $builder->add('name', null, array(
-            'label' => 'Estado Civil:',
+            'label' => 'form.civil.status.label.name',
             'required' => false,
             'attr' => array('class' => 'form-control'),
         ))->add('status', CheckboxType::class, array(
-            'label' => 'Activo?',
+            'label' => 'form.common.label.is_active',
             'required' => false,
             'attr' => array('class' => 'form-check-input'),
         ));

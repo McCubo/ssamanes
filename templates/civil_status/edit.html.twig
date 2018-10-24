@@ -1,12 +1,10 @@
 {% extends 'blank.html.twig' %}
 
 {% block pagetitle %}Editar Registro{% endblock %}
+{% block pagesubtitle %}Modificar valores actuales del registro {% endblock %}
 {% block title %}Editar Registro{% endblock %}
+{% block admin_active %}active{% endblock %}
 
 {% block body %}
-    {{ include('civil_status/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('civil_status_index') }}">back to list</a>
-
-    {{ include('civil_status/_delete_form.html.twig') }}
+    {{ include('civil_status/_form.html.twig', {'button_label': 'Modificar'}) }}    
 {% endblock %}

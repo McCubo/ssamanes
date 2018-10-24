@@ -1,5 +1,6 @@
 {% extends 'blank.html.twig' %}
 
+{% block admin_active %}active{% endblock %}
 {% block title %}
 Panel de Administraci&oacute;n
 {% endblock %}
@@ -23,7 +24,7 @@ Seleccione la opcion que desea configurar
 			<div class="icon">
 				<i class="fa fa-child"></i>
 			</div>
-			<a href="{{ path('civil_status_index') }}" class="small-box-footer">{% trans %}label.more_info{% endtrans %} <i
+			<a href="#" class="small-box-footer">{% trans %}label.more_info{% endtrans %} <i
 				class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
@@ -39,7 +40,7 @@ Seleccione la opcion que desea configurar
 			<div class="icon">
 				<i class="fa fa-balance-scale"></i>
 			</div>
-			<a href="#" class="small-box-footer">{% trans %}label.more_info{% endtrans %} <i
+			<a href="{{ path('civil_status_index') }}" class="small-box-footer">{% trans %}label.more_info{% endtrans %} <i
 				class="fa fa-arrow-circle-right"></i></a>
 		</div>
 	</div>

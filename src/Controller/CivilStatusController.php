@@ -47,14 +47,6 @@ class CivilStatusController extends Controller
     }
 
     /**
-     * @Route("/{name}/{id}/show", name="civil_status_show", methods="GET")
-     */
-    public function show(CivilStatus $civilStatus): Response
-    {
-        return $this->render('civil_status/show.html.twig', ['civil_status' => $civilStatus]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="civil_status_edit", methods="GET|POST")
      */
     public function edit(Request $request, CivilStatus $civilStatus): Response
@@ -65,7 +57,7 @@ class CivilStatusController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('civil_status_edit', ['id' => $civilStatus->getId()]);
+            return $this->redirectToRoute('civil_status_index');
         }
 
         return $this->render('civil_status/edit.html.twig', [
@@ -74,17 +66,4 @@ class CivilStatusController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="civil_status_delete", methods="DELETE")
-     */
-    public function delete(Request $request, CivilStatus $civilStatus): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$civilStatus->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($civilStatus);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('civil_status_index');
-    }
 }

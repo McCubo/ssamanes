@@ -70,6 +70,26 @@
                 <source>label.working_status</source>
                 <target>Estado laboral.</target>
             </trans-unit>
+            <trans-unit id="17">
+                <source>label.datatable.no_records</source>
+                <target>No se encontraron registros.</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>label.user.role.admin</source>
+                <target>Administrador.</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>label.user.role.user</source>
+                <target>Usuario.</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>form.civil.status.label.name</source>
+                <target>Estado Civil:</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>form.common.label.is_active</source>
+                <target>Activo?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

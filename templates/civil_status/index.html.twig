@@ -1,5 +1,6 @@
 {% extends 'blank.html.twig' %}
 
+{% block admin_active %}active{% endblock %}
 {% block title %}Lista de Estados Civiles {% endblock %}
 {% block pagetitle %}Lista de estados civiles {% endblock %}
 {% block pagesubtitle %}Estados configurados en el sistema {% endblock %}
@@ -8,12 +9,12 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>Estado Civil</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th>Fecha de actualizacion</th>
+                <th>acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,21 +22,26 @@
             <tr>
                 <td>{{ civil_status.id }}</td>
                 <td>{{ civil_status.name }}</td>
-                <td>{{ civil_status.status }}</td>
+                <td>{{ civil_status.status|record_status }}</td>
                 <td>{{ civil_status.createdAt ? civil_status.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ civil_status.updatedAt ? civil_status.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('civil_status_show', {'name': civil_status.nameSlug, 'id': civil_status.id}) }}">show</a>
-                    <a href="{{ path('civil_status_edit', {'id': civil_status.id}) }}">edit</a>
+                    <a href="{{ path('civil_status_edit', {'id': civil_status.id}) }}">
+                    	<i class="fa fa-edit"></i></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'label.datatable.no_records'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('civil_status_new') }}">Create new</a>
+	<br />
+    <a href="{{ path('civil_status_new') }}">
+    	<button class="btn btn-primary" type="button">
+    		<i class="fa fa-plus"></i> Crear nuevo registro
+    	</button>
+    </a>
 {% endblock %}
