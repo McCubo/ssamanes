@@ -16,7 +16,9 @@ class RequestListener {
 
     public function onKernelRequest (GetResponseEvent $event) {
         $request = $event->getRequest()->getRequestUri();
-        if ($request == '/' && $event->isMasterRequest() && $this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($request == '/' && $event->isMasterRequest() && 
+                ($this->authChecker->isGranted('IS_AUTHENTICATED_FULLY') || $this->authChecker->isGranted('IS_AUTHENTICATED_REMEMBERED'))
+                ) {
             $url = $this->router->generate('homepage');
             $event->setResponse(new RedirectResponse($url));
         }
