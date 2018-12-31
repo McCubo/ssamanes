@@ -90,6 +90,10 @@
                 <source>form.common.label.is_active</source>
                 <target>Activo?</target>
             </trans-unit>
+            <trans-unit id="22">
+                <source>form.workplace.label.name</source>
+                <target>Lugar de Trabajo:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

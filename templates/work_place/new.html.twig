@@ -1,0 +1,10 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+{% block title %}Nuevo registro {% endblock %}
+{% block pagetitle %}Ingresar nuevo registro {% endblock %}
+{% block pagesubtitle %}Crear nuevo lugar de trabajo {% endblock %}
+
+{% block body %}
+    {{ include('work_place/_form.html.twig') }}
+{% endblock %}
