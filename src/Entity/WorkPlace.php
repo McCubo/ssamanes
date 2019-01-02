@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WorkPlaceRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="name", message="Ya existe un registro con ese nombre!")
  */
 class WorkPlace
 {
@@ -18,11 +22,14 @@ class WorkPlace
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 4, max = 75, minMessage = "Nombre debe tener al menos {{ limit }} caracteres de longitud", 
+     *  maxMessage = "Nombre no puede ser mayor a {{ limit }} caracteres")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $status;
 
@@ -36,6 +43,23 @@ class WorkPlace
      */
     private $updatedAt;
 
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDefaultValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->status = true;
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedDateValue() {
+        $this->updatedAt = new \DateTime();
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -53,12 +77,12 @@ class WorkPlace
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
 

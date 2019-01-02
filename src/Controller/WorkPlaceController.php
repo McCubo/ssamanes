@@ -57,7 +57,7 @@ class WorkPlaceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('work_place_edit', ['id' => $workPlace->getId()]);
+            return $this->redirectToRoute('work_place_index');
         }
 
         return $this->render('work_place/edit.html.twig', [
