@@ -36,7 +36,7 @@ class WorkPlaceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($workPlace);
             $em->flush();
-
+            $this->addFlash('success', 'flash.success.new_record');
             return $this->redirectToRoute('work_place_index');
         }
 
@@ -56,7 +56,8 @@ class WorkPlaceController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            
+            $this->addFlash('success', 'flash.success.edit_record');
             return $this->redirectToRoute('work_place_index');
         }
 

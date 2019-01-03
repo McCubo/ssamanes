@@ -37,6 +37,7 @@ class CivilStatusController extends Controller
             $em->persist($civilStatus);
             $em->flush();
 
+            $this->addFlash('success', 'flash.success.new_record');
             return $this->redirectToRoute('civil_status_index');
         }
 
@@ -56,7 +57,8 @@ class CivilStatusController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            
+            $this->addFlash('success', 'flash.success.edit_record');
             return $this->redirectToRoute('civil_status_index');
         }
 

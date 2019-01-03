@@ -94,6 +94,14 @@
                 <source>form.workplace.label.name</source>
                 <target>Lugar de Trabajo:</target>
             </trans-unit>
+            <trans-unit id="23">
+                <source>flash.success.new_record</source>
+                <target>Registro ingresado exitosamente!.</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>flash.success.edit_record</source>
+                <target>Registro modificado exitosamente!.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
