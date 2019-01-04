@@ -102,6 +102,10 @@
                 <source>flash.success.edit_record</source>
                 <target>Registro modificado exitosamente!.</target>
             </trans-unit>
+            <trans-unit id="25">
+                <source>form.workingstatus.label.name</source>
+                <target>Estatus Laboral:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

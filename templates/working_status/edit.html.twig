@@ -1,0 +1,10 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+{% block title %}Estados Laborales {% endblock %}
+{% block pagetitle %}Editar registro existente {% endblock %}
+{% block pagesubtitle %}configuracion del sistema {% endblock %}
+
+{% block body %}
+    {{ include('working_status/_form.html.twig', {'button_label': 'Actualizar'}) }}
+{% endblock %}

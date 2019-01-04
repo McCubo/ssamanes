@@ -1,8 +1,8 @@
 {% extends 'blank.html.twig' %}
 
 {% block admin_active %}active{% endblock %}
-{% block title %}Lista de Lugares de trabajo {% endblock %}
-{% block pagetitle %}Lista de lugares de trabajo {% endblock %}
+{% block title %}Estados Laborales {% endblock %}
+{% block pagetitle %}Lista de estatus laborales {% endblock %}
 {% block pagesubtitle %}configuracion del sistema {% endblock %}
 
 {% block body %}
@@ -13,20 +13,20 @@
                 <th>Nombre</th>
                 <th>Estado</th>
                 <th>Fecha de creacion</th>
-                <th>Ultima Actualizacion</th>
+                <th>Ultima actualizacion</th>
                 <th>acciones</th>
             </tr>
         </thead>
         <tbody>
-        {% for work_place in work_places %}
+        {% for working_status in working_statuses %}
             <tr>
-                <td>{{ work_place.id }}</td>
-                <td>{{ work_place.name }}</td>
-                <td>{{ work_place.status|record_status }}</td>
-                <td>{{ work_place.createdAt ? work_place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ work_place.updatedAt ? work_place.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ working_status.id }}</td>
+                <td>{{ working_status.name }}</td>
+                <td>{{ working_status.status|record_status }}</td>
+                <td>{{ working_status.createdAt ? working_status.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ working_status.updatedAt ? working_status.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('work_place_edit', {'id': work_place.id}) }}">
+                    <a href="{{ path('working_status_edit', {'id': working_status.id}) }}">
                     	<i class="fa fa-edit"></i></i>
                     </a>
                 </td>
@@ -38,10 +38,10 @@
         {% endfor %}
         </tbody>
     </table>
-    <br />
-	 <a href="{{ path('work_place_new') }}">
+	<br />
+    <a href="{{ path('working_status_new') }}">
     	<button class="btn btn-primary" type="button">
     		<i class="fa fa-plus"></i> Crear nuevo registro
-    	</button>
+    	</button>    
     </a>
 {% endblock %}
