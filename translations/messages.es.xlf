@@ -106,6 +106,14 @@
                 <source>form.workingstatus.label.name</source>
                 <target>Estatus Laboral:</target>
             </trans-unit>
+            <trans-unit id="26">
+                <source>form.common.label.desc</source>
+                <target>Descripcion:</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>form.benefittype.label.name</source>
+                <target>Tipo de beneficio:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

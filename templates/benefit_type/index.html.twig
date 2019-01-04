@@ -1,0 +1,49 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+{% block title %}Tipos de beneficios {% endblock %}
+{% block pagetitle %}Lista de tipos de beneficios {% endblock %}
+{% block pagesubtitle %}configuracion del sistema {% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th>Ultima Actualizacion</th>
+                <th>acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for benefit_type in benefit_types %}
+            <tr>
+                <td>{{ benefit_type.id }}</td>
+                <td>{{ benefit_type.name }}</td>
+                <td>{{ benefit_type.description }}</td>
+                <td>{{ benefit_type.status|record_status }}</td>
+                <td>{{ benefit_type.createdAt ? benefit_type.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ benefit_type.updatedAt ? benefit_type.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('benefit_type_edit', {'id': benefit_type.id}) }}">
+                    	<i class="fa fa-edit"></i></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">{{ 'label.datatable.no_records'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	<br />
+    <a href="{{ path('benefit_type_new') }}">
+    	<button class="btn btn-primary" type="button">
+    		<i class="fa fa-plus"></i> Crear nuevo registro
+    	</button>
+    </a>
+{% endblock %}

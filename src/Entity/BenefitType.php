@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BenefitTypeRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="name", message="Ya existe un beneficio de nombre {{ value }}!")
  */
 class BenefitType
 {
@@ -18,16 +22,20 @@ class BenefitType
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message = "Este campo no puede ser vacio")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Assert\NotBlank(message = "Debe ingresar una descripcion del tipo de beneficio")
+     * @Assert\Length(min = 10, max = 200, minMessage = "Descripcion debe tener al menos {{ limit }} caracteres de longitud", 
+     *  maxMessage = "Descripcion no puede ser mayor a {{ limit }} caracteres")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $status;
 
@@ -41,6 +49,22 @@ class BenefitType
      */
     private $updatedAt;
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDefaultValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->status = true;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedDateValue() {
+        $this->updatedAt = new \DateTime();
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -70,12 +94,12 @@ class BenefitType
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
 

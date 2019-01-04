@@ -1,0 +1,11 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+
+{% block title %}Tipos de beneficios {% endblock %}
+{% block pagetitle %}Editar registro {% endblock %}
+{% block pagesubtitle %}configuracion del sistema {% endblock %}
+
+{% block body %}
+    {{ include('benefit_type/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
