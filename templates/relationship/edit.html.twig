@@ -1,0 +1,10 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+{% block title %}Parentescos {% endblock %}
+{% block pagetitle %}Editar registro {% endblock %}
+{% block pagesubtitle %}configuracion del sistema {% endblock %}
+
+{% block body %}
+    {{ include('relationship/_form.html.twig', {'button_label': 'Editar'}) }}
+{% endblock %}

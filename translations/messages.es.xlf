@@ -70,6 +70,10 @@
                 <source>label.working_status</source>
                 <target>Estado laboral.</target>
             </trans-unit>
+            <trans-unit id="label17">
+                <source>label.relationship</source>
+                <target>Parentesco.</target>
+            </trans-unit>
             <trans-unit id="17">
                 <source>label.datatable.no_records</source>
                 <target>No se encontraron registros.</target>
@@ -113,6 +117,10 @@
             <trans-unit id="27">
                 <source>form.benefittype.label.name</source>
                 <target>Tipo de beneficio:</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>form.relationship.label.name</source>
+                <target>Parentesco:</target>
             </trans-unit>
         </body>
     </file>

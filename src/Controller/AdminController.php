@@ -9,6 +9,7 @@ use App\Entity\BenefitType;
 use App\Entity\CivilStatus;
 use App\Entity\WorkPlace;
 use App\Entity\WorkingStatus;
+use App\Entity\Relationship;
 
 class AdminController extends Controller
 {
@@ -21,11 +22,13 @@ class AdminController extends Controller
         $civilStatusCount = $entityManager->getRepository(CivilStatus::class)->getActiveCount();
         $workplaceCount = $entityManager->getRepository(WorkPlace::class)->getActiveCount();
         $workingStatusCount = $entityManager->getRepository(WorkingStatus::class)->getActiveCount();
+        $relationCount = $entityManager->getRepository(Relationship::class)->getActiveCount();
         return $this->render('admin/index.html.twig', [
             'benefit_type_count' => $benefitTypeCount,
             'civil_status_count' => $civilStatusCount,
             'workplace_count' => $workplaceCount,
-            'working_status_count' => $workingStatusCount
+            'working_status_count' => $workingStatusCount,
+            'relation_count' => $relationCount
         ]);
     }
 }

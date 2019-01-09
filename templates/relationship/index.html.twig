@@ -1,0 +1,48 @@
+{% extends 'blank.html.twig' %}
+
+{% block admin_active %}active{% endblock %}
+{% block title %}Lista de Parentescos {% endblock %}
+{% block pagetitle %}Lista de parentescos {% endblock %}
+{% block pagesubtitle %}configuracion del sistema {% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Parentesco</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th>Ultima modificacion</th>
+                <th>acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for relationship in relationships %}
+            <tr>
+                <td>{{ relationship.id }}</td>
+                <td>{{ relationship.name }}</td>
+                <td>{{ relationship.status|record_status }}</td>
+                <td>{{ relationship.createdAt ? relationship.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ relationship.updatedAt ? relationship.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('relationship_edit', {'id': relationship.id}) }}">
+                    	<i class="fa fa-edit"></i></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">{{ 'label.datatable.no_records'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	
+	<br />
+    <a href="{{ path('relationship_new') }}">
+    	<button class="btn btn-primary" type="button">
+    		<i class="fa fa-plus"></i> Crear nuevo registro
+    	</button>    
+    </a>
+{% endblock %}

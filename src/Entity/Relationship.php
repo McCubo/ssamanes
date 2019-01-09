@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RelationshipRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="name", message="Ya existe un registro con nombre {{ value }}!")
  */
 class Relationship
 {
@@ -18,11 +22,18 @@ class Relationship
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message = "Este campo no puede ser vacio")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Parentesco debe tener al menos {{ limit }} caracteres de longitud",
+     *      maxMessage = "Nombre no puede tener mas de {{ limit }} caracters de longitud"
+     * )
      */
     private $name;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $status;
 
@@ -36,6 +47,22 @@ class Relationship
      */
     private $updatedAt;
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDefaultValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->status = true;
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedDateValue() {
+        $this->updatedAt = new \DateTime();
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -53,12 +80,12 @@ class Relationship
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
 

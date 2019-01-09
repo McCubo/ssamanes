@@ -77,6 +77,23 @@ Seleccione la opcion que desea configurar
 		</div>
 	</div>
 	<!-- ./col -->
+	<!-- ./col -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-purple">
+			<div class="inner">
+				<h3>{{ relation_count }}</h3>
+
+				<p>{% trans %}label.relationship{% endtrans %}</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+			<a href="{{ path('relationship_index') }}" class="small-box-footer">{% trans %}label.more_info{% endtrans %} <i
+				class="fa fa-arrow-circle-right"></i></a>
+		</div>
+	</div>
+	<!-- ./col -->	
 </div>
 <!-- /.info-box -->
 {% endblock %}
